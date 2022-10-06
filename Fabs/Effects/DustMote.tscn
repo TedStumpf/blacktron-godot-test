@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=2]
+
+[sub_resource type="CanvasItemMaterial" id=1]
+blend_mode = 1
+
+[sub_resource type="Curve" id=2]
+_data = [ Vector2( 0, 0 ), 0.0, 0.0, 0, 0, Vector2( 0.0190476, 1 ), -0.168449, -0.168449, 0, 0, Vector2( 1, 0 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="Gradient" id=3]
+offsets = PoolRealArray( 0, 0.731844, 1 )
+colors = PoolColorArray( 0.542969, 0.542969, 0.542969, 1, 0.373101, 0.373101, 0.373101, 1, 0, 0, 0, 1 )
+
+[node name="DustMote" type="Line2D"]
+material = SubResource( 1 )
+points = PoolVector2Array( -1, 2, 24, 0, 193, 2 )
+width = 2.0
+width_curve = SubResource( 2 )
+default_color = Color( 0.894118, 0.901961, 0.941176, 1 )
+gradient = SubResource( 3 )

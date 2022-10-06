@@ -1,0 +1,96 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://Fabs/Ships/Controllers/Ship_Control_Player.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Assets/Textures/starfield.jpg" type="Texture" id=2]
+[ext_resource path="res://Fabs/Effects/DustMoteManager.tscn" type="PackedScene" id=3]
+
+[sub_resource type="Environment" id=1]
+background_mode = 4
+glow_enabled = true
+
+[sub_resource type="Shader" id=6]
+code = "shader_type canvas_item;
+
+uniform vec4 bg_color;
+uniform float count = 10.0;
+uniform float size = 0.01;
+uniform float filter = 0;
+
+vec2 random(vec2 uv) {
+	return vec2(fract(sin(dot(uv.xy,
+		vec2(12.9898,78.233))) * 43758.5453123));
+}
+
+vec2 voronoi(vec2 uv, float columns, float rows) {
+	
+	vec2 index_uv = floor(vec2(uv.x * columns, uv.y * rows));
+	vec2 fract_uv = fract(vec2(uv.x * columns, uv.y * rows));
+	
+	float minimum_dist = 1.0;
+	vec2 minimum_point;
+	
+	for (int y= -1; y <= 1; y++) {
+		for (int x= -1; x <= 1; x++) {
+			vec2 neighbor = vec2(float(x),float(y));
+			vec2 point = random(index_uv + neighbor);
+			
+			vec2 diff = neighbor + point - fract_uv;
+			float dist = length(diff);
+			
+			if (dist < minimum_dist) {
+				minimum_dist = dist;
+				minimum_point = point;
+			}
+		}
+	}
+	
+	if (minimum_dist <= size) {
+		return minimum_point;
+	}
+	return vec2(0);
+}
+
+void fragment() {
+	vec2 voronoi = voronoi(UV, count, count);
+	if (voronoi.g < filter) {
+		COLOR = vec4(vec3(0), 1.0);
+	}
+	else {
+		COLOR = vec4(vec3(voronoi.r), 1.0);
+	}
+}"
+
+[sub_resource type="ShaderMaterial" id=4]
+shader = SubResource( 6 )
+shader_param/bg_color = null
+shader_param/count = 200.0
+shader_param/size = 0.03
+shader_param/filter = 0.0
+
+[sub_resource type="QuadMesh" id=5]
+
+[node name="WorldEnvironment" type="WorldEnvironment"]
+environment = SubResource( 1 )
+
+[node name="Sprite" type="Sprite" parent="."]
+visible = false
+z_index = -1000
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( -2500, -2500, 5000, 5000 )
+
+[node name="Ship_Control_Player" parent="." instance=ExtResource( 1 )]
+position = Vector2( 512, 300 )
+
+[node name="Camera2D" type="Camera2D" parent="Ship_Control_Player"]
+current = true
+smoothing_enabled = true
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="Ship_Control_Player/Camera2D"]
+material = SubResource( 4 )
+position = Vector2( -41, -117 )
+scale = Vector2( 5000, 5000 )
+z_index = -1000
+mesh = SubResource( 5 )
+
+[node name="DustMoteManager" parent="Ship_Control_Player" instance=ExtResource( 3 )]
