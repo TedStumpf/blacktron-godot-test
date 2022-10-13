@@ -1,8 +1,9 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Fabs/Ships/Controllers/Ship_Control_Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Assets/Textures/starfield.jpg" type="Texture" id=2]
 [ext_resource path="res://Fabs/Effects/DustMoteManager.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Scenes/SpaceHud.tscn" type="PackedScene" id=4]
 
 [sub_resource type="Environment" id=1]
 background_mode = 4
@@ -94,3 +95,5 @@ z_index = -1000
 mesh = SubResource( 5 )
 
 [node name="DustMoteManager" parent="Ship_Control_Player" instance=ExtResource( 3 )]
+
+[node name="HUD" parent="." instance=ExtResource( 4 )]

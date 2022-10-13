@@ -1,166 +1,24 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=4 format=2]
 
-[sub_resource type="VisualShaderNodeScalarFunc" id=8]
-function = 11
-
-[sub_resource type="VisualShaderNodeScalarOp" id=9]
-default_input_values = [ 0, 0.0, 1, 0.9 ]
-operator = 1
-
-[sub_resource type="VisualShaderNodeScalarFunc" id=10]
-output_port_for_preview = 0
-function = 12
-
-[sub_resource type="VisualShaderNodeScalarOp" id=11]
-output_port_for_preview = 0
-default_input_values = [ 0, 0.0, 1, -1.0 ]
-operator = 2
-
-[sub_resource type="VisualShaderNodeScalarOp" id=12]
-output_port_for_preview = 0
-default_input_values = [ 0, 0.0, 1, 0.05 ]
-
-[sub_resource type="VisualShaderNodeScalarClamp" id=13]
-output_port_for_preview = 0
-
-[sub_resource type="VisualShaderNodeScalarFunc" id=14]
-output_port_for_preview = 0
-
-[sub_resource type="VisualShaderNodeInput" id=1]
-output_port_for_preview = 0
-input_name = "uv"
-
-[sub_resource type="VisualShaderNodeVectorOp" id=2]
-default_input_values = [ 0, Vector3( 0, 0, 0 ), 1, Vector3( 0.5, 0.5, 0.5 ) ]
-operator = 1
-
-[sub_resource type="VisualShaderNodeVectorOp" id=3]
-output_port_for_preview = 0
-default_input_values = [ 0, Vector3( 0, 0, 0 ), 1, Vector3( 2, 2, 2 ) ]
-operator = 2
-
-[sub_resource type="VisualShaderNodeVectorOp" id=15]
-default_input_values = [ 0, Vector3( 0, 0, 0 ), 1, Vector3( 2, 2, 1 ) ]
-operator = 5
-
-[sub_resource type="VisualShaderNodeScalarOp" id=16]
-
-[sub_resource type="VisualShaderNodeVectorDecompose" id=17]
-
-[sub_resource type="VisualShader" id=5]
-code = "shader_type canvas_item;
-
-
-
-void vertex() {
-// Output:0
-
-}
-
-void fragment() {
-// Input:2
-	vec3 n_out2p0 = vec3(UV, 0.0);
-
-// VectorOp:4
-	vec3 n_in4p1 = vec3(0.50000, 0.50000, 0.50000);
-	vec3 n_out4p0 = n_out2p0 - n_in4p1;
-
-// VectorOp:5
-	vec3 n_in5p1 = vec3(2.00000, 2.00000, 2.00000);
-	vec3 n_out5p0 = n_out4p0 * n_in5p1;
-
-// VectorOp:6
-	vec3 n_in6p1 = vec3(2.00000, 2.00000, 1.00000);
-	vec3 n_out6p0 = pow(n_out5p0, n_in6p1);
-
-// VectorDecompose:9
-	float n_out9p0 = n_out6p0.x;
-	float n_out9p1 = n_out6p0.y;
-	float n_out9p2 = n_out6p0.z;
-
-// ScalarOp:8
-	float n_out8p0 = n_out9p0 + n_out9p1;
-
-// ScalarFunc:10
-	float n_out10p0 = sqrt(n_out8p0);
-
-// ScalarOp:11
-	float n_in11p1 = 0.90000;
-	float n_out11p0 = n_out10p0 - n_in11p1;
-
-// ScalarFunc:12
-	float n_out12p0 = abs(n_out11p0);
-
-// ScalarOp:13
-	float n_in13p1 = -1.00000;
-	float n_out13p0 = n_out12p0 * n_in13p1;
-
-// ScalarOp:14
-	float n_in14p1 = 0.05000;
-	float n_out14p0 = n_out13p0 + n_in14p1;
-
-// ScalarClamp:15
-	float n_in15p1 = 0.00000;
-	float n_in15p2 = 1.00000;
-	float n_out15p0 = clamp(n_out14p0, n_in15p1, n_in15p2);
-
-// ScalarFunc:16
-	float n_out16p0 = sign(n_out15p0);
-
-// Output:0
-	COLOR.rgb = vec3(n_out16p0);
-	COLOR.a = n_out16p0;
-
-}
-
-void light() {
-// Output:0
-
-}
-"
-graph_offset = Vector2( 184.421, -335 )
-mode = 1
-flags/light_only = false
-nodes/fragment/0/position = Vector2( 2300, 80 )
-nodes/fragment/2/node = SubResource( 1 )
-nodes/fragment/2/position = Vector2( -420, 0 )
-nodes/fragment/4/node = SubResource( 2 )
-nodes/fragment/4/position = Vector2( -240, 0 )
-nodes/fragment/5/node = SubResource( 3 )
-nodes/fragment/5/position = Vector2( -60, 0 )
-nodes/fragment/6/node = SubResource( 15 )
-nodes/fragment/6/position = Vector2( 100, 0 )
-nodes/fragment/8/node = SubResource( 16 )
-nodes/fragment/8/position = Vector2( 460, 0 )
-nodes/fragment/9/node = SubResource( 17 )
-nodes/fragment/9/position = Vector2( 260, 0 )
-nodes/fragment/10/node = SubResource( 8 )
-nodes/fragment/10/position = Vector2( 620, 0 )
-nodes/fragment/11/node = SubResource( 9 )
-nodes/fragment/11/position = Vector2( 1020, 20 )
-nodes/fragment/12/node = SubResource( 10 )
-nodes/fragment/12/position = Vector2( 1180, 20 )
-nodes/fragment/13/node = SubResource( 11 )
-nodes/fragment/13/position = Vector2( 1380, 20 )
-nodes/fragment/14/node = SubResource( 12 )
-nodes/fragment/14/position = Vector2( 1540, 20 )
-nodes/fragment/15/node = SubResource( 13 )
-nodes/fragment/15/position = Vector2( 1700, 20 )
-nodes/fragment/16/node = SubResource( 14 )
-nodes/fragment/16/position = Vector2( 1860, 20 )
-nodes/fragment/connections = PoolIntArray( 2, 0, 4, 0, 4, 0, 5, 0, 5, 0, 6, 0, 6, 0, 9, 0, 9, 0, 8, 0, 9, 1, 8, 1, 8, 0, 10, 0, 10, 0, 11, 0, 11, 0, 12, 0, 12, 0, 13, 0, 13, 0, 14, 0, 14, 0, 15, 0, 15, 0, 16, 0, 16, 0, 0, 0, 16, 0, 0, 1 )
+[ext_resource path="res://Scenes/Speedometer.gdshader" type="Shader" id=1]
 
 [sub_resource type="ShaderMaterial" id=6]
-shader = SubResource( 5 )
+shader = ExtResource( 1 )
+shader_param/speedFullness = 0.0
+shader_param/rotationFullness = 0.0
+shader_param/mainRingColor = Color( 0.360784, 0.360784, 0.360784, 1 )
+shader_param/backgroundColor = Color( 0.0862745, 0.0862745, 0.0862745, 1 )
+shader_param/speedColor = Color( 0.0784314, 0.752941, 0, 1 )
+shader_param/rotationColor = Color( 0, 0.447059, 0.972549, 1 )
+shader_param/ringSegments = 8.0
+shader_param/mainRingRadius = 0.8
+shader_param/mainRingThickness = 0.15
+shader_param/innerRingThickness = 0.08
+shader_param/dividerThickness = 0.101
 
 [sub_resource type="QuadMesh" id=7]
 
-[node name="Control" type="Control"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-
-[node name="MeshInstance2D" type="MeshInstance2D" parent="."]
+[node name="Speedometer" type="MeshInstance2D"]
 material = SubResource( 6 )
-position = Vector2( 100, 500 )
 scale = Vector2( 200, 200 )
 mesh = SubResource( 7 )
