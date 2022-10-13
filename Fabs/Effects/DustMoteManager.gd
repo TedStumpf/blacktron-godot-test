@@ -9,7 +9,7 @@ var ship;
 
 
 func _ready():
-	for i in range(count):
+	for _i in range(count):
 		var mote = dustEffect.instance();
 		add_child(mote);
 		mote.global_position = global_position + Vector2.RIGHT.rotated(rand_range(0, PI * 2)) * rand_range(0, radius);
