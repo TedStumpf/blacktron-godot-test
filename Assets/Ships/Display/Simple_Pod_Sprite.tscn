@@ -1,0 +1,61 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Assets/Ships/Sprites/SimplePod2D.png" type="Texture" id=1]
+[ext_resource path="res://Assets/Ships/FX/RCSThrustEffect.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Assets/Ships/Data/Simple_Pod_Data.gd" type="Script" id=3]
+[ext_resource path="res://Assets/Ships/Display/ThrusterNode.gd" type="Script" id=4]
+
+[node name="Simple_Pod_Sprite" type="Sprite"]
+texture = ExtResource( 1 )
+script = ExtResource( 3 )
+
+[node name="Thrusters" type="Node2D" parent="."]
+
+[node name="Thruster_Main" type="Node2D" parent="Thrusters"]
+position = Vector2( -15, 0 )
+rotation = 3.14159
+script = ExtResource( 4 )
+
+[node name="RCS" type="Node2D" parent="."]
+
+[node name="RCSThrust_F1" parent="RCS" instance=ExtResource( 2 )]
+position = Vector2( 13, -6 )
+isBackward = true
+
+[node name="RCSThrust_F2" parent="RCS" instance=ExtResource( 2 )]
+position = Vector2( 13, 6 )
+isBackward = true
+
+[node name="RCSThrust_R1" parent="RCS" instance=ExtResource( 2 )]
+position = Vector2( 12, 7 )
+rotation = 1.5708
+isLeft = true
+isCCW = true
+
+[node name="RCSThrust_R2" parent="RCS" instance=ExtResource( 2 )]
+position = Vector2( -10, 7 )
+rotation = 1.5708
+isLeft = true
+isCW = true
+
+[node name="RCSThrust_B1" parent="RCS" instance=ExtResource( 2 )]
+position = Vector2( -11, 6 )
+rotation = 3.14159
+isForward = true
+
+[node name="RCSThrust_B2" parent="RCS" instance=ExtResource( 2 )]
+position = Vector2( -11, -6 )
+rotation = 3.14159
+isForward = true
+
+[node name="RCSThrust_L1" parent="RCS" instance=ExtResource( 2 )]
+position = Vector2( -10, -7 )
+rotation = -1.5708
+isRight = true
+isCCW = true
+
+[node name="RCSThrust_L2" parent="RCS" instance=ExtResource( 2 )]
+position = Vector2( 12, -7 )
+rotation = -1.5708
+isRight = true
+isCW = true
