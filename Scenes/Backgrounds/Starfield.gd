@@ -45,6 +45,8 @@ func init():
 	RegenStars();
 
 func Resize(w, h):
+	if (starDataImg == null):
+		init();
 	starDataImg.unlock();
 	starDataImg.resize(w, h);
 	RedrawStars()

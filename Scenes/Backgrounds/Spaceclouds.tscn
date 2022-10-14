@@ -1,0 +1,60 @@
+[gd_scene load_steps=7 format=2]
+
+[sub_resource type="Shader" id=1]
+code = "shader_type canvas_item;
+
+uniform vec4 color1 : hint_color;
+uniform vec4 color2 : hint_color;
+uniform sampler2D noise_shading;
+uniform sampler2D noise_visibility;
+
+void fragment() {
+	float shading = texture(noise_shading, UV).x;
+	float visibility = texture(noise_visibility, UV).x;
+	float vis = visibility * visibility;
+	vis = clamp(mix(-0.3, 0.8, vis), 0, 1);
+	// Output
+	vec4 col = mix(color1, color2, shading);
+	COLOR.rgb = col.rgb;
+	COLOR.a = vis;
+}"
+
+[sub_resource type="OpenSimplexNoise" id=3]
+
+[sub_resource type="NoiseTexture" id=4]
+width = 1024
+height = 1024
+seamless = true
+noise = SubResource( 3 )
+
+[sub_resource type="OpenSimplexNoise" id=5]
+seed = 3
+period = 200.0
+persistence = 0.6
+
+[sub_resource type="NoiseTexture" id=6]
+width = 1024
+height = 1024
+seamless = true
+noise = SubResource( 5 )
+
+[sub_resource type="ShaderMaterial" id=2]
+render_priority = -127
+shader = SubResource( 1 )
+shader_param/color1 = Color( 0.0941176, 0.105882, 0.552941, 1 )
+shader_param/color2 = Color( 0.615686, 0, 1, 1 )
+shader_param/noise_shading = SubResource( 4 )
+shader_param/noise_visibility = SubResource( 6 )
+
+[node name="ParallaxBackground" type="ParallaxBackground"]
+layer = -127
+scroll_ignore_camera_zoom = true
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="."]
+motion_scale = Vector2( 0.25, 0.25 )
+motion_mirroring = Vector2( 2048, 2048 )
+
+[node name="ColorRect" type="ColorRect" parent="ParallaxLayer"]
+material = SubResource( 2 )
+margin_right = 2048.0
+margin_bottom = 2048.0
