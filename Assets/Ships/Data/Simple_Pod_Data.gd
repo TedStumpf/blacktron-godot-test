@@ -1,6 +1,6 @@
 extends Sprite
 
-export var ship_base_speed = 300;
+export var ship_base_speed = 800;
 export var ship_base_acc = 40 * 9000;
 export var ship_base_rcs = 20 * 9000;
 export var ship_base_mass = 9000;
