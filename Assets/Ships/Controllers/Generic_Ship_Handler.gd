@@ -120,7 +120,7 @@ func _process(delta):
 				var trail = trailEffect.instance();
 				thrustNode.add_child(trail);
 				thrustNode.activeTrail = trail;
-			thrustNode.activeTrail.AddPoint(thrustNode.global_position, velocity + Vector2.RIGHT.rotated(thrustNode.global_rotation) * 150);
+			thrustNode.activeTrail.AddPoint(thrustNode.global_position - velocity / 60, velocity + Vector2.RIGHT.rotated(thrustNode.global_rotation) * 150);
 	else:
 		#	Release trails
 		for thrustNode in thrustRoot.get_children():
