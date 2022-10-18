@@ -20,6 +20,7 @@ func _process(_delta):
 	
 	var mousePos = get_global_mouse_position();
 	var windowSize = OS.get_window_size();
+	var velOffsetPos = ship.global_position - (handler.velocity);
 	$Camera2D.global_position = ship.global_position;
-	$Camera2D.offset_h = (mousePos.x - ship.global_position.x) / (windowSize.x / 2.0);
-	$Camera2D.offset_v = (mousePos.y - ship.global_position.y) / (windowSize.y / 2.0);
+	$Camera2D.offset_h = (mousePos.x - velOffsetPos.x) / (windowSize.x / 2.0);
+	$Camera2D.offset_v = (mousePos.y - velOffsetPos.y) / (windowSize.y / 2.0);
