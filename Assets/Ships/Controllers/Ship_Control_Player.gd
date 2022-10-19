@@ -15,6 +15,7 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
 	handler.SetInputsPlayer(Input.is_action_pressed("direction_forward"), Input.is_action_pressed("direction_left"), Input.is_action_pressed("direction_right"), Input.is_action_pressed("direction_back"));
+	handler.ManualProcess(_delta)
 	
 	HUD.SetSpeedometer(handler.velocity.length() / ship.ship_base_speed, handler.rotSpeed / -ship.ship_base_rot);
 	

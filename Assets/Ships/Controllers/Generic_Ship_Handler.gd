@@ -17,7 +17,7 @@ func _ready():
 
 
 
-func _process(delta):
+func ManualProcess(delta):
 	var speed = velocity.length();
 	
 	var rawLinAcc = ship.ship_base_acc / ship.ship_base_mass;
