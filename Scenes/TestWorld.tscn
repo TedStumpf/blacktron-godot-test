@@ -1,7 +1,8 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://Assets/Ships/Controllers/Ship_Control_Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Assets/Ships/Models/Textures/starfield.jpg" type="Texture" id=2]
+[ext_resource path="res://HUD/FPS_DISP.gd" type="Script" id=3]
 [ext_resource path="res://HUD/Main Gameplay/SpaceHud.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Scenes/Backgrounds/Starfield.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Scenes/Backgrounds/Spaceclouds.tscn" type="PackedScene" id=6]
@@ -95,6 +96,19 @@ position = Vector2( -41, -117 )
 scale = Vector2( 5000, 5000 )
 z_index = -1000
 mesh = SubResource( 5 )
+
+[node name="FPS_DISP" type="Label" parent="Ship_Control_Player/Camera2D"]
+anchor_right = 0.046
+anchor_bottom = 0.037
+margin_left = -489.0
+margin_top = -283.0
+margin_right = -465.0
+margin_bottom = -269.0
+rect_scale = Vector2( 3, 3 )
+size_flags_stretch_ratio = 0.0
+text = "100"
+percent_visible = -0.333333
+script = ExtResource( 3 )
 
 [node name="HUD" parent="." instance=ExtResource( 4 )]
 
