@@ -13,6 +13,12 @@ config_version=4
 config/name="The Pod Goes to the Store"
 run/main_scene="res://Scenes/TestWorld.tscn"
 
+[display]
+
+window/size/resizable=false
+window/size/borderless=true
+window/size/fullscreen=true
+
 [editor]
 
 version_control_autoload_on_startup=true

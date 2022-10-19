@@ -14,6 +14,8 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
+	if (Input.is_action_pressed("ui_cancel")):
+		get_tree().quit();
 	handler.SetInputsPlayer(Input.is_action_pressed("direction_forward"), Input.is_action_pressed("direction_left"), Input.is_action_pressed("direction_right"), Input.is_action_pressed("direction_back"));
 	handler.ManualProcess(_delta)
 	
